@@ -1,0 +1,182 @@
+
+{% extends 'DimosoApp/base.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}Home {% endblock %}</title>
+    
+    
+  
+   <style type="text/css">
+
+    
+    
+   <style type="text/css">
+       
+/*--------------------------------------------------------------
+# Services
+--------------------------------------------------------------*/
+.services .icon-box {
+  text-align: center;
+  border: 1px solid #d5e1ed;
+  padding: 80px 20px;
+  transition: all ease-in-out 0.3s;
+}
+
+.services .icon-box .icon {
+  margin: 0 auto;
+  width: 64px;
+  height: 64px;
+  background: #1977cc;
+  border-radius: 5px;
+  transition: all .3s ease-out 0s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  transform-style: preserve-3d;
+}
+
+.services .icon-box .icon i {
+  color: #fff;
+  font-size: 28px;
+}
+
+.services .icon-box .icon::before {
+  position: absolute;
+  content: '';
+  left: -8px;
+  top: -8px;
+  height: 100%;
+  width: 100%;
+  background: #badaf7;
+  border-radius: 5px;
+  transition: all .3s ease-out 0s;
+  transform: translateZ(-1px);
+}
+
+.services .icon-box h4 {
+  font-weight: 700;
+  margin-bottom: 15px;
+  font-size: 24px;
+}
+
+.services .icon-box h4 a {
+  color: #2c4964;
+}
+
+.services .icon-box p {
+  line-height: 24px;
+  font-size: 14px;
+  margin-bottom: 0;
+}
+
+.services .icon-box:hover {
+  background: #1977cc;
+  border-color: #1977cc;
+}
+
+.services .icon-box:hover .icon {
+  background: #fff;
+}
+
+.services .icon-box:hover .icon i {
+  color: #1977cc;
+}
+
+.services .icon-box:hover .icon::before {
+  background: #3291e6;
+}
+
+.services .icon-box:hover h4 a, .services .icon-box:hover p {
+  color: #fff;
+}
+body{
+  background: url("{% static 'DimosoApp/assets/img/b2.jpeg' %}");
+}
+   </style>
+
+</head>
+
+<body style="background-color: white;" >
+
+
+   <div class="container" style="width: 100%;">
+     {% if messages %}
+      {% for message in messages %}
+      
+
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>{{message}}</strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+      {% endfor %}
+    {% endif %}
+
+    <!-- ======= Services Section ======= -->
+    <section id="services" class="services" >
+      <div class="container">
+        <center>
+
+        <div class="section-title" style="margin-bottom: 1cm;margin-top: 0cm;">
+          <h2 style="color: black;font-weight: bold;"><u>  CLUB INFORMATIONS MANAGEMENT </u></h2>
+          </div>
+        <div class="row">
+            {% if teams %}
+            {% for team in teams %}
+
+
+          <div class="col-md-3" style="margin-bottom: 1cm;"><!--kufungua column--->
+     
+            {% if team.image %}
+            <a href="{{team.link}}">
+              <img src="{{team.image.url}}" style="width: 150px;height: 150px;">
+              </a>
+              {% else %}
+
+            
+
+    <img src="{% static 'DimosoApp/assets/img/44.jpg' %}" style="width: 150px;height: 150px;">
+         {% endif %}
+              <h4 ><a href="" style="color: red;font-family: geogia;font-weight: bold;"> {{team.name}}</a></h4>
+         
+          
+          
+      </div><!---kufunga column--->
+      {% endfor %}
+      {% endif %}
+
+                      
+        
+
+        </div><!--mwisho wa row kubwa--->
+
+
+
+
+
+
+
+
+
+
+
+
+
+</center>
+      </div>
+    </section><!-- End Services Section -->
+
+
+</div>
+</body>
+
+</html>
+{% endblock %}
+

@@ -1,0 +1,497 @@
+{% extends 'DimosoApp/base.html' %}
+{% load static %}
+{% block title %}All Simba Players {% endblock %}
+
+
+{% block content %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+ <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+
+ <!---jqeury css link---->
+     <link rel="stylesheet" href="{% static 'DimosoApp/assets/jqueryui/jquery-ui.css' %}">
+    <link rel="stylesheet" href="{% static 'DimosoApp/assets/jqueryui/jquery-ui.structure.min.css' %}">
+    <link rel="stylesheet" href="{% static 'DimosoApp/assets/jqueryui/jquery-ui.structure.css' %}">
+    <link rel="stylesheet" href="{% static 'DimosoApp/assets/jqueryui/jquery-ui.theme.min.css' %}">
+     <link rel="stylesheet" href="{% static 'DimosoApp/assets/jqueryui/jquery-ui.theme.css' %}">
+
+
+  <style type="text/css">
+  .table-wrapper {
+        background: #fff;
+        padding: 20px 25px;
+        margin: 30px 0;
+    border-radius: 3px;
+        box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    }
+  .table-title {        
+    padding-bottom: 15px;
+    background: #435d7d;
+    color: #fff;
+    padding: 16px 30px;
+    margin: -20px -25px 10px;
+    border-radius: 3px 3px 0 0;
+    }
+    .table-title h2 {
+    margin: 5px 0 0;
+    font-size: 24px;
+  }
+  .table-title .btn-group {
+    float: right;
+  }
+  .table-title .btn {
+    color: #fff;
+    float: right;
+    font-size: 13px;
+    border: none;
+    min-width: 50px;
+    border-radius: 2px;
+    border: none;
+    outline: none !important;
+    margin-left: 10px;
+  }
+  .table-title .btn i {
+    float: left;
+    font-size: 21px;
+    margin-right: 5px;
+  }
+  .table-title .btn span {
+    float: left;
+    margin-top: 2px;
+  }
+
+
+
+
+
+
+
+
+
+       .pagination {
+        float: right;
+        margin: 0 0 5px;
+    }
+    .pagination li a {
+        border: none;
+        font-size: 13px;
+        min-width: 30px;
+        min-height: 30px;
+        color: #999;
+        margin: 0 2px;
+        line-height: 30px;
+        border-radius: 2px !important;
+        text-align: center;
+        padding: 0 6px;
+    }
+    .pagination li a:hover {
+        color: #666;
+    } 
+    .pagination li.active a, .pagination li.active a.page-link {
+        background: #03A9F4;
+    }
+    .pagination li.active a:hover {        
+        background: #0397d6;
+    }
+  .pagination li.disabled i {
+        color: #ccc;
+    }
+    .pagination li i {
+        font-size: 16px;
+        padding-top: 6px
+    }
+    .hint-text {
+        float: left;
+        margin-top: 10px;
+        font-size: 13px;
+    }    
+
+
+
+
+
+/*--------------------------------------------------------------
+# Doctors
+--------------------------------------------------------------*/
+.doctors {
+  background: #fff;
+}
+
+.doctors .member {
+  position: relative;
+  box-shadow: 0px 2px 15px rgba(44, 73, 100, 0.08);
+  padding: 30px;
+  border-radius: 10px;
+}
+
+.doctors .member .pic {
+  overflow: hidden;
+  width: 180px;
+  border-radius: 50%;
+}
+
+.doctors .member .pic img {
+  transition: ease-in-out 0.3s;
+}
+
+.doctors .member:hover img {
+  transform: scale(1.1);
+}
+
+.doctors .member .member-info {
+  padding-left: 30px;
+}
+
+.doctors .member h4 {
+  font-weight: 700;
+  margin-bottom: 5px;
+  font-size: 20px;
+  color: #2c4964;
+}
+
+.doctors .member span {
+  display: block;
+  font-size: 15px;
+  padding-bottom: 10px;
+  position: relative;
+  font-weight: 500;
+}
+
+.doctors .member span::after {
+  content: '';
+  position: absolute;
+  display: block;
+  width: 50px;
+  height: 1px;
+  background: #b2c8dd;
+  bottom: 0;
+  left: 0;
+}
+
+.doctors .member p {
+  margin: 10px 0 0 0;
+  font-size: 14px;
+}
+
+.doctors .member .social {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.doctors .member .social a {
+  transition: ease-in-out 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50px;
+  width: 32px;
+  height: 32px;
+  background: #a0bcd5;
+}
+
+.doctors .member .social a i {
+  color: #fff;
+  font-size: 16px;
+  margin: 0 2px;
+}
+
+.doctors .member .social a:hover {
+  background: #1977cc;
+}
+
+.doctors .member .social a + a {
+  margin-left: 8px;
+}
+
+
+
+  
+
+
+
+
+   .small-img{
+      width: 70px;
+      height: 70px;
+    }
+    td{
+        font-size: 25px;
+        font-family: bold;
+        color: red;
+        font-weight: ;
+    }
+
+
+
+  </style>
+
+
+
+ 
+</head>
+<body style="margin-top: 0cm;">
+
+     {% if messages %}
+      {% for message in messages %}
+      
+
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>{{message}}</strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+      {% endfor %}
+    {% endif %}
+
+
+   
+  
+   <div class="container">
+        <div class="table-wrapper">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-6">
+            <h2>ALL MTIBWA <b>PLAYERS</b></h2>
+          </div>
+          <div class="col-sm-6">
+            <a href="{% url 'add_mtibwa_player' %}" class="btn btn-success" data-toggle="modal"><i class="fa fa-plus"></i> <span>Add Mtibwa Player</span></a>
+                    
+          </div>
+                </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+ {% if players %}
+  
+  <main class="mt-1 pt-4">
+    <div class="container" style="margin-top: ;">
+     
+
+
+
+
+
+
+
+<div>
+  <center>
+  
+
+
+
+
+
+
+
+      
+
+
+ 
+       
+
+
+
+   <!-- ======= Doctors Section ======= -->
+      <section id="doctors" class="doctors">
+        <div class="container">
+
+
+  
+          <div class="section-title">
+            <h2>Player Details</h2>
+             </div>
+  
+          <div class="row">
+            
+             {% for object in players %}
+                         <div class="col-lg-6">
+              <div class="member d-flex align-items-start">
+                {% if object.image %}
+
+                <div class="pic"><img src="{{object.image.url}}" class="img-fluid" alt=""></div>
+                {% else %}
+                <div class="pic">
+                 <img src="{% static 'DimosoApp/assets/img/mtibwa.png' %}" style="width: 150px;height: 150px;"></div>
+                {% endif %}
+
+
+
+                <div class="member-info">
+                  <h4 style="color: red;">Name:{{object.prayer_name}}</h4>
+                  <h4>Team: {{object.team_name}}</h4>
+
+
+
+         
+<h4>Goals: {{object.total_goals}}  
+<a href="{% url 'MtibwaGoalsDetail' object.pk %}"  type="submit" style="color: red; font-weight: bold;"><i class="fa fa-eye" aria-hidden="true"></i> </a></h4>
+
+<h4>Assists: {{object.total_assists}} <a href="{% url 'MtibwaAssistsDetail' object.pk %}"  type="submit" style="color: red; font-weight: bold;"><i class="fa fa-eye" aria-hidden="true"></i> </a></h4>
+
+<h4>Yellow: {{object.total_yellow}}  <a href="{% url 'MtibwaYellowDetail' object.pk %}"  type="submit" style="color: red; font-weight: bold;"><i class="fa fa-eye" aria-hidden="true"></i> </a></h4>
+
+
+<h4>RedCard: {{object.total_red}} <a href="{% url 'MtibwaRedDetail' object.pk %}"  type="submit" style="color: red; font-weight: bold;"><i class="fa fa-eye" aria-hidden="true"></i> </a> </h4>
+
+
+<h4><a href="{% url 'MtibwaSummaryDetail' object.pk %}" class="btn btn-primary" type="submit" style="padding: 1px;margin-top: 20px;">Summary</a>
+
+  {% if user.is_superuser %}
+  <a href="{% url 'update_mtibwa_player' object.pk %}" class="btn btn-success" type="submit" style="padding: 1px;margin-top: 20px;">Update</a> 
+  
+<a href="{% url 'delete_mtibwa_player' object.pk %}" class="btn btn-danger" type="submit" style="padding: 1px;margin-top: 20px;">Delete</a>  </h4>
+{% endif %}
+ 
+
+
+
+
+                  
+           
+                
+
+                   
+                </div>
+                
+              </div>
+              
+            </div>
+            
+            {% endfor %}
+            {% else %}
+
+  <center>  <h1 style="font-weight: bold;color: blue;">KIKOSI CHA MTIBWA FC</h1></center>
+
+<div style="width: 90%;">
+                   <img src="{% static 'DimosoApp/assets/img/vikosi/mtibwa.jpeg' %}" style="width: 100%;height: 10cm;">
+  
+</div>
+
+         <h2> This Page is coming soon!!!</h2>
+
+            {% endif %}
+            
+  
+               </div>
+  
+        </div>
+      </section><!-- End Doctors Section -->
+
+
+
+
+
+
+
+
+
+                
+ 
+    
+
+
+   <div class="clearfix">
+                <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
+                <ul class="pagination">
+                    <li class="page-item disabled"><a href="#">Previous</a></li>
+                    <li class="page-item"><a href="#" class="page-link">1</a></li>
+                    <li class="page-item"><a href="#" class="page-link">2</a></li>
+                    <li class="page-item active"><a href="#" class="page-link">3</a></li>
+                    <li class="page-item"><a href="#" class="page-link">4</a></li>
+                    <li class="page-item"><a href="#" class="page-link">5</a></li>
+                    <li class="page-item"><a href="#" class="page-link">Next</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>  
+      
+
+      
+    </center>
+  </div>
+
+
+
+    </div>
+  </main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--jquery code for autocomplete javascriptcode---->
+<script src="{% static 'DimosoApp/assets/jqueryui/external/jquery/jquery.js' %}" type="text/javascript"></script>
+<script src="{% static 'DimosoApp/assets/jqueryui/jquery-ui.js' %}" type="text/javascript"></script>
+
+
+
+
+
+ 
+
+
+<script >
+  $( function() {
+    var availableTags = [
+      "ActionScript",
+      "AppleScript",
+      "Asp",
+      "BASIC",
+      "C",
+      "C++",
+      "Clojure",
+      "COBOL",
+      "ColdFusion",
+      "Erlang",
+      "Fortran",
+      "Groovy",
+      "Haskel",
+      "Java",
+      "JavaScript",
+      "Lisp",
+      "Perl",
+      "PHP",
+      "Python",
+      "Ruby",
+      "Scala",
+      "Scheme"
+      
+
+    ];
+
+   $( "#prayer_name" ). autocomplete({
+    source: "{% url 'search_player_autocomplete' %}",
+  });
+
+
+  } );
+  
+  
+
+</script>
+
+</body>
+</html>
+
+{% endblock %}

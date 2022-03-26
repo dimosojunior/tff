@@ -1,0 +1,75 @@
+{% extends 'DimosoApp/base.html' %}
+{% load static %}
+{% block title %}login here{% endblock %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+   
+    <style>
+         input{
+            padding: 5px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            width: 8cm;
+        }
+      
+    </style>
+</head>
+<body>
+  
+
+  <div class="container">
+    <div class="row">
+
+<center>
+   <div class="col-md-6"> 
+
+  <div style="text-align: center;margin-top: 5px;background-color: lightblue;">
+     <h1 style="font-family: bold;">Club Informations Management</h1>
+<form action="" method="POST">
+    {% csrf_token %}
+<label>UserName</label><br>
+<input type="text" name="username" required><br>
+
+<label>Password</label><br>
+<input type="text" name="password" required><br>
+
+ {% if messages %}
+    {% for message in messages %}
+     
+
+          <div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>{{message}}</strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+    {% endfor %}
+  {% endif %}
+
+
+
+<button type="submit">Login</button>
+
+</form>
+</div>
+</div><!--mwisho wa column ya width 6-->
+
+
+</center>
+</div><!--mwisho wa row-->
+</div><!--mwisho wa column-->
+    <script src="{% static 'DimosoApp/js/wow.min.js' %}"></script><script src="js/jquery-1.12.0.min.js"></script>
+<script src="{% static 'DimosoApp/js/bootstrap.min.js' %}"></script>
+</body>
+</html>
+{% endblock %}

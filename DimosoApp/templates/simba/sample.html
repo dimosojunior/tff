@@ -1,0 +1,325 @@
+{% extends 'DimosoApp/base.html' %}
+{% load static %}
+{% block title %}All Simba Players {% endblock %}
+
+
+{% block content %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+ <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <style type="text/css">
+  .table-wrapper {
+        background: #fff;
+        padding: 20px 25px;
+        margin: 30px 0;
+    border-radius: 3px;
+        box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    }
+  .table-title {        
+    padding-bottom: 15px;
+    background: #435d7d;
+    color: #fff;
+    padding: 16px 30px;
+    margin: -20px -25px 10px;
+    border-radius: 3px 3px 0 0;
+    }
+    .table-title h2 {
+    margin: 5px 0 0;
+    font-size: 24px;
+  }
+  .table-title .btn-group {
+    float: right;
+  }
+  .table-title .btn {
+    color: #fff;
+    float: right;
+    font-size: 13px;
+    border: none;
+    min-width: 50px;
+    border-radius: 2px;
+    border: none;
+    outline: none !important;
+    margin-left: 10px;
+  }
+  .table-title .btn i {
+    float: left;
+    font-size: 21px;
+    margin-right: 5px;
+  }
+  .table-title .btn span {
+    float: left;
+    margin-top: 2px;
+  }
+
+
+
+
+
+
+
+
+    
+       .pagination {
+        float: right;
+        margin: 0 0 5px;
+    }
+    .pagination li a {
+        border: none;
+        font-size: 13px;
+        min-width: 30px;
+        min-height: 30px;
+        color: #999;
+        margin: 0 2px;
+        line-height: 30px;
+        border-radius: 2px !important;
+        text-align: center;
+        padding: 0 6px;
+    }
+    .pagination li a:hover {
+        color: #666;
+    } 
+    .pagination li.active a, .pagination li.active a.page-link {
+        background: #03A9F4;
+    }
+    .pagination li.active a:hover {        
+        background: #0397d6;
+    }
+  .pagination li.disabled i {
+        color: #ccc;
+    }
+    .pagination li i {
+        font-size: 16px;
+        padding-top: 6px
+    }
+    .hint-text {
+        float: left;
+        margin-top: 10px;
+        font-size: 13px;
+    }    
+
+
+
+
+
+
+
+
+
+
+   .small-img{
+      width: 70px;
+      height: 70px;
+    }
+    td{
+        font-size: 25px;
+        font-family: bold;
+        color: red;
+        font-weight: ;
+    }
+
+
+
+  </style>
+
+  
+ <!---jqeury css link---->
+     <link rel="stylesheet" href="{% static 'DimosoApp/assets/jqueryui/jquery-ui.css' %}">
+    <link rel="stylesheet" href="{% static 'DimosoApp/assets/jqueryui/jquery-ui.structure.min.css' %}">
+    <link rel="stylesheet" href="{% static 'DimosoApp/assets/jqueryui/jquery-ui.structure.css' %}">
+    <link rel="stylesheet" href="{% static 'DimosoApp/assets/jqueryui/jquery-ui.theme.min.css' %}">
+     <link rel="stylesheet" href="{% static 'DimosoApp/assets/jqueryui/jquery-ui.theme.css' %}">
+
+ 
+</head>
+<body>
+  
+   <div class="container">
+        <div class="table-wrapper">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-6">
+            <h2>ALL SIMBA <b>PLAYERS</b></h2>
+          </div>
+          <div class="col-sm-6">
+            <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add Simba Player</span></a>
+            <a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>            
+          </div>
+                </div>
+            </div>
+          </div>
+        </div>
+
+
+
+  
+  <main class="mt-1 pt-4">
+    <div class="container" style="margin-top: ;">
+        {% if messages %}
+      {% for message in messages %}
+      
+
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>{{message}}</strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+      {% endfor %}
+    {% endif %}
+
+
+
+
+
+
+
+<div>
+  <center>
+  
+
+{% if players %}
+
+
+
+
+
+
+
+      <section class="mb-1">
+        
+     <div class="table-responsive text-nowrap">
+          
+          <table class="table" style="font-size: 20px;">
+            <thead>
+              <tr>
+                
+                <th scope="col">Player Name</th>
+                <th scope="col">Team Name</th>
+                <th scope="col">Total Goals</th>
+                <th scope="col">Total Assists</th>
+                <th scope="col">Total YellowCard</th>
+                
+                <th scope="col">Total RedCard</th>
+                <th scope="col">Player Summary</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+                {% for object in players %}
+              
+                
+                
+            <tr>
+                <td>{{object.prayer_name}}</td>
+                <td>{{object.team_name}}</td>
+                <td>{{object.total_goals}}-<a href="{% url 'SimbaGoalsDetail' object.pk %}" class="btn btn-primary btn-md my-0 p" type="submit">more</a>
+                <td>{{object.total_assists}}-<a href="{% url 'SimbaAssistsDetail' object.pk %}" class="btn btn-primary btn-md my-0 p" type="submit">more</a></td>
+                <td>{{object.total_yellow}}-<a href="{% url 'SimbaYellowDetail' object.pk %}" class="btn btn-primary btn-md my-0 p" type="submit">more</a></td>
+                <td>{{object.total_red}}-<a href="{% url 'SimbaRedDetail' object.pk %}" class="btn btn-primary btn-md my-0 p" type="submit">more</a></td>
+                <td><a href="{% url 'SimbaSummaryDetail' object.pk %}" class="btn btn-primary btn-md my-0 p" type="submit">summary</a></td>
+
+
+      <td>
+                            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                            <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                        </td>
+           
+      
+
+                   
+            </tr>
+            
+              {% endfor %}
+              {% else %}
+              <h1>There is no any Simba Player informations </h1>
+            {% endif %}
+            </tbody>
+          </table>
+     </div>
+
+
+   <div class="clearfix">
+                <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
+                <ul class="pagination">
+                    <li class="page-item disabled"><a href="#">Previous</a></li>
+                    <li class="page-item"><a href="#" class="page-link">1</a></li>
+                    <li class="page-item"><a href="#" class="page-link">2</a></li>
+                    <li class="page-item active"><a href="#" class="page-link">3</a></li>
+                    <li class="page-item"><a href="#" class="page-link">4</a></li>
+                    <li class="page-item"><a href="#" class="page-link">5</a></li>
+                    <li class="page-item"><a href="#" class="page-link">Next</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>  
+      </section>
+
+      
+    </center>
+  </div>
+
+
+
+    </div>
+  </main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--jquery code for autocomplete javascriptcode---->
+<script src="{% static 'DimosoApp/assets/jqueryui/external/jquery/jquery.js' %}" type="text/javascript"></script>
+<script src="{% static 'DimosoApp/assets/jqueryui/jquery-ui.js' %}" type="text/javascript"></script>
+
+
+
+
+
+ 
+{% if messages %}
+{% for m in messages %}
+<script >
+  
+  swal.fire({
+    "title": "added successs",
+    "text": "{{m}}",
+    "icon":"successs"
+  })
+</script>
+
+{% endfor %}
+
+{% endif %}
+
+</body>
+</html>
+
+{% endblock %}
+
+
+<h4>Goals: {{object.total_goals}}-<a href="{% url 'SimbaGoalsDetail' object.pk %}" class="btn btn-primary" type="submit" style="padding: 1px;">view</a> </h4>
+
+<h4>Assists: {{object.total_assists}}-<a href="{% url 'SimbaAssistsDetail' object.pk %}" class="btn btn-primary" type="submit" style="padding: 1px;">view</a> </h4>
+
+<h4>Yellow: {{object.total_yellow}}-<a href="{% url 'SimbaYellowDetail' object.pk %}" class="btn btn-primary" type="submit" style="padding: 1px;">view</a> </h4>
+
+<h4>Red: {{object.total_red}}-<a href="{% url 'SimbaRedDetail' object.pk %}" class="btn btn-primary" type="submit" style="padding: 1px;">view</a> </h4>
+
+<h4>All informations:<a href="{% url 'SimbaSummaryDetail' object.pk %}" class="btn btn-primary" type="submit" style="padding: 1px;">Summary</a> </h4>
+
+<h4>Action: <a href="{% url 'SimbaAssistsDetail' object.pk %}" class="btn btn-primary" type="submit" style="padding: 1px;">Update</a> 
+<a href="{% url 'SimbaAssistsDetail' object.pk %}" class="btn btn-danger" type="submit" style="padding: 1px;">Delete</a> </h4>

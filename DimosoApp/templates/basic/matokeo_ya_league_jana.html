@@ -1,0 +1,116 @@
+{% extends 'DimosoApp/base.html' %}
+{% load static %}
+{% block title %}Matokeo {% endblock %}
+
+
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	 <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<style type="text/css">
+		body{
+			background-color: white;
+		}
+		td{
+			font-size: 20px;
+		}
+			.table{
+			border: 2px solid blue;
+			border-radius: 15px;
+			
+		}
+		table tbody tr td,
+table thead tr th,
+table thead{
+	border-left: 2px solid black;
+	border-right:2px solid black;
+	border-bottom: 2px solid black;
+	border-top: 2px solid black; 
+}
+	
+body{
+	background-color: brown;
+	color: ;
+
+}
+
+
+	</style>
+
+
+</head>
+<body style="margin-top: 0cm;">
+
+ {% if user.is_superuser %}	
+<a href="{% url 'add_matokeo_ya_mechi' %}"class="btn-primary" type="submit" style="margin-bottom: : 0cm;margin-bottom: 0cm;font-weight: bold;font-size: 20px;color: white;font-weight: bold;padding-left: 3px;border-radius: 10px;padding: 15px;margin-bottom: 1cm;"><span style="color: white;">Add Match Results</a>	
+
+	{% endif %}
+<div class="container" style="width: 100%;">
+	
+
+{% if siku %}
+
+<div class="row" style="">
+
+	
+<div class="col-md-12">
+	{% for x in siku %}
+	
+	<a href="{{x.link}}"class="btn-primary" type="submit" style="margin-bottom: : 0cm;margin-bottom: 0cm;font-weight: bold;font-size: 15px;color: white;font-weight: bold;padding-left: 3px;border-radius: 10px;padding-right: 5px;margin-bottom: 1cm;">{{x.post_date|date}}</a>
+	{% endfor %}
+	</div>
+	
+	</div>
+
+	{% else %}
+	<div style="background-color: blue;border: 2px solid red;border-radius: 10px;color: white; margin-bottom: 1cm;">>
+		<h3 style="font-size: 15px;color: red;">No match played</h3>
+	</div>
+
+	{% endif %}
+	
+
+
+
+
+
+
+{% if matokeo %}
+	{% for x in matokeo %}
+
+	<center style="background-color: red;border-radius: 20px;">
+		<h1 style="font-size: 20px;font-weight: bold;color: white">{{x.title}}</h1>
+		<div>{{x.header|safe}}</div>
+	</center>
+
+	<div style="background-color: brown;border: 2px solid blue;border-radius: 10px;color: white">
+	
+	{{x.ratiba|safe}}<br>
+	</div>
+<div>
+	{% if user.is_superuser %}
+  <a href="{% url 'update_matokeo_ya_mechi' x.pk %}" class="btn btn-success" type="submit" style="padding: 1px;margin-top: 20px;margin-right: 1cm;">Update</a> 
+  
+<a href="{% url 'delete_matokeo_ya_mechi' x.pk %}" class="btn btn-danger" type="submit" style="padding: 1px;margin-top: 20px;">Delete</a>  </h4>
+{% endif %}
+
+</div>
+	
+	
+{% endfor %}
+{% else %}
+
+<h1 style="color: red;">There is no any match results for this day !!!
+{{matokeo.post_date}}</h1>	
+
+{% endif %}
+</div>
+
+</center>
+</body>
+</html>
+{% endblock %}

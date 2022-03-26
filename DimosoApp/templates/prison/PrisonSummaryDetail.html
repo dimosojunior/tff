@@ -1,0 +1,44 @@
+
+{% extends 'DimosoApp/base.html' %}
+{% load static %}
+{% block title %}All summary {% endblock %}
+
+
+{% block content %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	 <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<style type="text/css">
+		body{
+			background-color: white;
+		}
+		td{
+			font-size: 20px;
+		}
+		.table{
+			border: 2px solid blue;
+			border-radius: 15px;
+		}
+	</style>
+</head>
+<body style="margin-top: 0cm;">
+<center>
+	
+<div class="container">
+	<h1>UNTIL {{players.last_update}} </h1>
+<div class="table">
+	{{players.all_summary|safe}}<br>
+
+</div>	
+	
+</div>
+
+</center>
+</body>
+</html>
+{% endblock %}

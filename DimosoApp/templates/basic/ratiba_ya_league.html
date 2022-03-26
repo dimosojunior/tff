@@ -1,0 +1,101 @@
+{% extends 'DimosoApp/base.html' %}
+{% load static %}
+{% block title %}Ratiba {% endblock %}
+
+
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	 <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<style type="text/css">
+		body{
+			background-color: white;
+		}
+		td{
+			font-size: 20px;
+		}
+			.table{
+			border: 2px solid blue;
+			border-radius: 15px;
+			
+		}
+		tbody, td, tfoot, th, thead, tr {
+    border-color: white;
+    border-style: solid;
+    border-width: 0;
+}
+body{
+	background-color: brown;
+	color: ;
+
+}
+table tbody tr td,
+table thead tr th,
+table thead{
+	border-left: 2px solid black;
+	border-right:2px solid black;
+	border-bottom: 2px solid black;
+	border-top: 2px solid black; 
+}
+
+	</style>
+
+
+</head>
+<body style="margin-top: 0cm;">
+
+<div>
+	{% if messages %}
+      {% for message in messages %}
+      
+
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>{{message}}</strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+      {% endfor %}
+    {% endif %}
+</div>
+
+
+	 {% if user.is_superuser %}	
+<a href="{% url 'add_ratiba_ya_mechi' %}"class="btn-primary" type="submit" style="margin-bottom: : 0cm;margin-bottom: 0cm;font-weight: bold;font-size: 20px;color: white;font-weight: bold;padding-left: 3px;border-radius: 10px;padding: 15px;margin-bottom: 1cm;"><span style="color: white;">Add Ratiba Ya League</a>	
+
+	{% endif %}
+<center>
+	
+<div class="container" style="width: 100%;">
+	{% for x in ratiba %}
+
+	<center style="background-color: red;border-radius: 20px;">
+		<h1 style="font-size: 20px;font-weight: bold;color: white">{{x.title}}</h1>
+		<div>{{x.header|safe}}</div>
+	</center>
+
+	<div style="background-color: brown;border: 2px solid blue;border-radius: 10px;color: white">
+	
+	{{x.ratiba|safe}}<br>
+	</div>
+
+
+{% if user.is_superuser %}
+  <a href="{% url 'update_ratiba_ya_mechi' x.pk %}" class="btn btn-success" type="submit" style="padding: 1px;margin-top: 20px;margin-right: 1cm;">Update</a> 
+  
+<a href="{% url 'delete_ratiba_ya_mechi' x.pk %}" class="btn btn-danger" type="submit" style="padding: 1px;margin-top: 20px;">Delete</a>  </h4>
+{% endif %}
+
+
+
+
+	
+{% endfor %}	
+</div>
+
+</center>
+</body>
+</html>
+{% endblock %}
